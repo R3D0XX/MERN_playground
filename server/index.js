@@ -3,30 +3,40 @@ import colors from "colors"
 import cors from "cors"
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
+import testModel from "./models/testModel.js";
 
 dotenv.config();
 
 const router = express.Router();
 const app = express();
-const port = process.env.PORT || 5001
 
-app.use(express.json());
-app.use(cors());
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-)
+const addMiddleware = () => {
+    app.use(express.json());
+    app.use(cors());
+    app.use(
+        express.urlencoded({
+            extended: true,
+        })
+    )
+}
 
-app.use("/api", router)
-router.get("/test", (req, res) => {
-    res.json({
-        message: "test route"
+const addRoutes = () => {
+    app.use("/api", router)
+
+    router.get("/testing", async (req, res) => {
+        const myTesting = await testModel.find();
+        console.log('myTesting', myTesting);
+        res.json({
+            data: myTesting,
+            info: {
+                number: myTesting.length,
+                pages: 1,
+            },
+        })
     });
-});
+}
 
 const DBConnection = async () => {
-    // console.log('process.env.DB', process.env.DB)
     try {
         await mongoose.connect(process.env.DB);
         console.log('Connection to DB succesfull'.bgGreen);
@@ -34,10 +44,19 @@ const DBConnection = async () => {
         console.log("error connecting to the DB".bgRed, error);
     }
 };
-DBConnection();
 
+const startServer = () => {
+    const port = process.env.PORT || 5001
 
-app.listen(port, () => {
-    console.log('Server is running.'.bgGreen, port);
+    app.listen(port, () => {
+        console.log('Server is running.'.bgGreen, port);
+    });
+}
 
-});
+(
+    async function controller() {
+        await DBConnection()
+        addMiddleware()
+        addRoutes()
+        startServer()
+    })();
