@@ -6,23 +6,12 @@ const testingSchema = new mongoose.Schema({
         required: true
     },
 
-    location: {
-        latitude: {
-            type: Number,
-            require: false,
-        },
-        longitute: {
-            type: Number,
-            require: false
-        },
-    },
-
     likes: {
         type: Number,
         required: false
     },
 
-    Birthyear: {
+    birthyear: {
         type: Number,
         required: true
     },
@@ -33,6 +22,7 @@ const testingSchema = new mongoose.Schema({
         required: true
     },
 
+    hobbies: { type: Array, required: false, default: undefined },
 });
 
 const testModel = mongoose.model("testing", testingSchema)
