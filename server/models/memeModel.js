@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const memSchema = new mongoose.Schema({
+const memeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -15,5 +15,5 @@ const memSchema = new mongoose.Schema({
     }
 });
 
-const memModel = mongoose.model("meme", memSchema);
-export default memModel;
+const memeModel = mongoose.model("meme", memeSchema);
+export default memeModel;

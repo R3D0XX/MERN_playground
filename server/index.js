@@ -3,12 +3,11 @@ import colors from "colors"
 import cors from "cors"
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import testModel from "./models/testModel.js";
-import memModel from "./models/memModel.js";
+import memeRoute from "./routes/memeRoute.js"
+import Router from "./routes/memeRoute.js";
 
 dotenv.config();
 
-const router = express.Router();
 const app = express();
 
 const addMiddleware = () => {
@@ -22,30 +21,8 @@ const addMiddleware = () => {
 }
 
 const addRoutes = () => {
-    app.use("/api", router)
-
-    // router.get("/testing", async (req, res) => {
-    //     const myTesting = await testModel.find();
-    //     console.log('myTesting', myTesting);
-    //     res.json({
-    //         data: myTesting,
-    //         info: {
-    //             number: myTesting.length,
-    //             pages: 1,
-    //         },
-    //     })
-    // });
-    router.get("/memes", async (req, res) => {
-        const allMemes = await memModel.find();
-        console.log('allMemes', allMemes),
-            res.json({
-                data: allMemes,
-                info: {
-                    number: allMemes.length,
-                    pages: 1,
-                },
-            })
-    });
+    app.use("/api", Router)
+    app.use("/api/memes", memeRoute);
 };
 
 
