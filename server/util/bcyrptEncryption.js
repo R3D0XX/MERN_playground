@@ -9,6 +9,7 @@ const hashPassword = async (userPassword) => {
     // console.log('hashedPassword', hashedPassword)
 
     return hashedPassword;
+
 };
 
 export { hashPassword };
