@@ -1,5 +1,6 @@
 import { v2 as cloudinary } from "cloudinary"
 import userModel from "../models/userModel.js";
+import { hashPassword } from "../util/bcyrptEncryption.js";
 
 
 const uploadImage = async (req, res) => {
@@ -22,14 +23,42 @@ const uploadImage = async (req, res) => {
 const register = async (req, res) => {
     console.log('req.body', req.body)
 
-    try {
-        const newUser = new userModel({
-            userName: req.body.userName,
-            email: req.body.email,
-            password: req.body.password,
-        })
-    } catch (error) {
 
+    try {
+        const hashedPassword = await hashPassword(req.body.password)
+        if (hashedPassword) {
+            try {
+                const newUser = new userModel({
+                    userName: req.body.userName,
+                    email: req.body.email,
+                    password: hashedPassword,
+                    profileImage: req.body.profileImage,
+                });
+                const savedUser = await newUser.save()
+                res.status(201).json({
+                    message: "new user registerd",
+                    user: {
+                        userName: savedUser.userName,
+                        email: savedUser.email,
+                        userImage: savedUser.userImage
+                    }
+                })
+
+            } catch (error) {
+                console.log('error saving user', error)
+                res.status(500).json({
+                    success: false,
+                    message: "Internal server error"
+                })
+            }
+        }
+
+    } catch (error) {
+        console.log('error', error)
+        res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        })
     }
 };
 

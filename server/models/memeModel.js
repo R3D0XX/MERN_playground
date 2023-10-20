@@ -13,6 +13,7 @@ const memeSchema = new mongoose.Schema({
         type: String,
         required: true,
     }
+
 });
 
 const memeModel = mongoose.model("meme", memeSchema);

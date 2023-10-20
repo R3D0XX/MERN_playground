@@ -11,6 +11,7 @@
   "author": "Merlin \"Wizzard\" Tamsjadi",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.0",
     "color": "^4.2.3",
     "colors": "^1.4.0",
