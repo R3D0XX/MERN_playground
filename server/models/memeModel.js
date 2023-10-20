@@ -16,4 +16,5 @@ const memeSchema = new mongoose.Schema({
 });
 
 const memeModel = mongoose.model("meme", memeSchema);
+
 export default memeModel;

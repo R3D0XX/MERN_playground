@@ -3,8 +3,11 @@ import colors from "colors"
 import cors from "cors"
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
-import memeRoute from "./routes/memeRoute.js"
+
+
 import Router from "./routes/memeRoute.js";
+import memeRoute from "./routes/memeRoute.js"
+import userRoute from "./routes/userRoute.js";
 
 dotenv.config();
 
@@ -23,6 +26,7 @@ const addMiddleware = () => {
 const addRoutes = () => {
     app.use("/api", Router)
     app.use("/api/memes", memeRoute);
+    app.use("/api/users", userRoute)
 };
 
 
