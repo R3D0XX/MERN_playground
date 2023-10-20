@@ -3,12 +3,16 @@ import path from "path"
 
 const storage = multer.diskStorage({});
 
-const fileFilter = (req, res, cb) => {
-    cb(null, false);
+const fileFilter = (req, file, cb) => {
+    // console.log('file', file);
 
-    cb(null, true);
-
-    cb(new Error("I have no clue"));
+    const extension = path.extname(file.originalname);
+    // console.log('extension', extension);
+    if (extension !== ".png" && extension !== ".jpg" && extension !== ".jpeg") {
+        return cb(new Error("Only image files are allowed"), false);
+    } else {
+        cb(null, true);
+    }
 }
 
 const multerUpload = multer({ storage, fileFilter });

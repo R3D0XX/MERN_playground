@@ -5,9 +5,11 @@ import mongoose from "mongoose";
 import * as dotenv from "dotenv";
 
 
+
 import Router from "./routes/memeRoute.js";
 import memeRoute from "./routes/memeRoute.js"
 import userRoute from "./routes/userRoute.js";
+import cloudinaryConfig from "./config/cloudinaryConfig.js";
 
 dotenv.config();
 
@@ -21,12 +23,13 @@ const addMiddleware = () => {
             extended: true,
         })
     )
+    cloudinaryConfig();
 }
 
 const addRoutes = () => {
     app.use("/api", Router)
     app.use("/api/memes", memeRoute);
-    app.use("/api/users", userRoute)
+    app.use("/api/users", userRoute);
 };
 
 
