@@ -48,7 +48,7 @@ const register = async (req, res) => {
                 console.log('error saving user', error)
                 res.status(500).json({
                     success: false,
-                    message: "Internal server error"
+                    message: "something went wrong with the registration"
                 })
             }
         }
