@@ -73,7 +73,7 @@ const Register = () => {
     };
     try {
       const response = await fetch(
-        "http://localhost:5001/api/users/register",
+        "http://localhost:5001/api/user/register",
         requestOptions
       );
       const result = await response.json();

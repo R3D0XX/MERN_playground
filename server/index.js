@@ -29,7 +29,7 @@ const addMiddleware = () => {
 const addRoutes = () => {
     app.use("/api", Router)
     app.use("/api/memes", memeRoute);
-    app.use("/api/users", userRoute);
+    app.use("/api/user", userRoute);
 };
 
 

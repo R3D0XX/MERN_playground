@@ -27,30 +27,42 @@ const register = async (req, res) => {
     try {
         const hashedPassword = await hashPassword(req.body.password)
         if (hashedPassword) {
-            try {
-                const newUser = new userModel({
-                    userName: req.body.userName,
-                    email: req.body.email,
-                    password: hashedPassword,
-                    profileImage: req.body.profileImage,
-                });
-                const savedUser = await newUser.save()
-                res.status(201).json({
-                    message: "new user registerd",
-                    user: {
-                        userName: savedUser.userName,
-                        email: savedUser.email,
-                        userImage: savedUser.userImage
-                    }
-                })
 
-            } catch (error) {
-                console.log('error saving user', error)
-                res.status(500).json({
+            const existingUser = await userModel.findOne({ email: req.body.email })
+            if (existingUser) {
+                res.status(400).json({
                     success: false,
-                    message: "something went wrong with the registration"
+                    message: "User already exists"
                 })
+            } else {
+                try {
+                    const newUser = new userModel({
+                        userName: req.body.userName,
+                        email: req.body.email,
+                        password: hashedPassword,
+                        profileImage: req.body.profileImage,
+                    });
+                    const savedUser = await newUser.save()
+                    res.status(201).json({
+                        message: "new user registerd",
+                        user: {
+                            userName: savedUser.userName,
+                            email: savedUser.email,
+                            userImage: savedUser.userImage
+                        }
+                    })
+
+                } catch (error) {
+                    console.log('error saving user', error)
+                    res.status(500).json({
+                        success: false,
+                        message: "something went wrong with the registration"
+                    })
+                }
             }
+
+
+
         }
 
     } catch (error) {
