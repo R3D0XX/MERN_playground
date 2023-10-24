@@ -35,7 +35,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5001/api/users/imageUpload",
+        "http://localhost:5001/api/user/imageUpload",
         requestOptions
       );
       const result = (await response.json()) as UserImage;
@@ -48,8 +48,8 @@ const Register = () => {
   };
 
   const handleRegisterInput = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("e.target.name ", e.target.name);
-    console.log("e.target.value", e.target.value);
+    // console.log("e.target.name ", e.target.name);
+    // console.log("e.target.value", e.target.value);
     setnewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
@@ -61,7 +61,7 @@ const Register = () => {
     urlencoded.append("email", newUser.email);
     urlencoded.append("password", newUser.password);
     urlencoded.append(
-      "password",
+      "profileImageUpload",
       newUser.userImage
         ? newUser.userImage
         : "https://tse2.mm.bing.net/th?id=OIP.jUNv1G1kKJbVPlZYBOSsDQAAAA&pid=Api"
