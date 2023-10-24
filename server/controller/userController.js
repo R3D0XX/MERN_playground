@@ -77,8 +77,7 @@ const register = async (req, res) => {
 
 
 const login = async (req, res) => {
-    // console.log("login controller");
-    console.log('req.body', req.body)
+    // console.log('req.body', req.body)
     try {
         const existingUser = await userModel.findOne({ email: req.body.email })
         if (!existingUser) {
@@ -91,6 +90,7 @@ const login = async (req, res) => {
                 const isMatch = await verifypassword(req.body.password, existingUser.password)
                 if (isMatch) {
                     const token = generateToken(existingUser._id);
+                    // console.log('token in login function', token)
                     if (token) {
                         res.status(200).json({
                             success: true,
@@ -99,12 +99,13 @@ const login = async (req, res) => {
                                 userName: existingUser.userName,
                                 email: existingUser.email,
                                 userImage: existingUser.userImage
-                            }
+                            },
+                            token
                         })
                     } else {
                         res.status(500).json({
                             success: false,
-                            message: "eroor generating token"
+                            message: "error generating token"
                         })
                     }
                 } else {

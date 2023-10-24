@@ -14,7 +14,7 @@ const generateToken = (userID) => {
     const secretOrPrivateKey = process.env.TOKEN_SECRET
 
     const token = jwt.sign(payload, secretOrPrivateKey, options)
-    console.log('token', token)
+    // console.log('token', token)
     return token
 }
 
