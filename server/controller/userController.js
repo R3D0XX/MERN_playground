@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary"
 import userModel from "../models/userModel.js";
-import { hashPassword } from "../util/bcyrptEncryption.js";
+import { hashPassword, verifypassword } from "../util/bcyrptEncryption.js";
+import { generateToken } from "../util/generateToken.js";
 
 
 const uploadImage = async (req, res) => {
@@ -74,4 +75,57 @@ const register = async (req, res) => {
     }
 };
 
-export { uploadImage, register };
+
+const login = async (req, res) => {
+    // console.log("login controller");
+    console.log('req.body', req.body)
+    try {
+        const existingUser = await userModel.findOne({ email: req.body.email })
+        if (!existingUser) {
+            res.status(400).json({
+                success: false,
+                message: "User not found"
+            })
+        } else {
+            try {
+                const isMatch = await verifypassword(req.body.password, existingUser.password)
+                if (isMatch) {
+                    const token = generateToken(existingUser._id);
+                    if (token) {
+                        res.status(200).json({
+                            success: true,
+                            message: "Login successful",
+                            user: {
+                                userName: existingUser.userName,
+                                email: existingUser.email,
+                                userImage: existingUser.userImage
+                            }
+                        })
+                    } else {
+                        res.status(500).json({
+                            success: false,
+                            message: "eroor generating token"
+                        })
+                    }
+                } else {
+                    res.status(400).json({
+                        success: false,
+                        message: "Invalid password"
+                    })
+                }
+            }
+            catch (error) {
+                console.log('error', error)
+                res.status(500).json({
+                    success: false,
+                    message: "something went wrong"
+                })
+            }
+        }
+    }
+    catch (error) {
+        console.log('error', error)
+    }
+}
+
+export { uploadImage, register, login };

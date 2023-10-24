@@ -3,6 +3,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 function App() {
   // const fetchMemes = () => {
@@ -19,6 +20,8 @@ function App() {
     <>
       <h1> Spatial Magic</h1>
       <Register />
+      <br />
+      <Login />
     </>
   );
 }
