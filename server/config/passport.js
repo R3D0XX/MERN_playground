@@ -13,8 +13,10 @@ const opts = {
 
 //* Define Strategy
 const JwtPassportStrategy = new JwtStrategy(opts, async function (jwt_payload, done) {
+
     try {
-        const user = await userModel.findOne(jwt_payload.sub)
+        const user = await userModel.findOne({ _id: jwt_payload.sub })
+        console.log('user', user)
         if (user) {
             return done(null, user);
         } else {

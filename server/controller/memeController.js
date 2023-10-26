@@ -9,12 +9,12 @@ const getAllMemes = async (req, res) => {
             (allMemes.length < 1) {
             res.status(404).json({ message: "No memes found" });
         } else {
-            res.status(200).jason({ number: allMemes.length, allMemes: allMemes });
+            res.status(200).json({ number: allMemes.length, allMemes: allMemes });
         }
 
     } catch (error) {
         console.log('error', error);
-        res.status(500).jason({ error: "something went wrong" })
+        res.status(500).json({ error: "something went wrong" })
     }
 };
 

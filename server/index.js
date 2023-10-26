@@ -11,7 +11,7 @@ import memeRoute from "./routes/memeRoute.js"
 import userRoute from "./routes/userRoute.js";
 import cloudinaryConfig from "./config/cloudinaryConfig.js";
 import passportConfig from "./config/passport.js";
-import jwtAuth from "./middlewares/jwtAuth.js";
+
 
 dotenv.config();
 
@@ -35,7 +35,8 @@ const addMiddleware = () => {
 const addRoutes = () => {
     app.use("/api", Router)
     app.use("/api/memes", memeRoute);
-    app.use("/api/user", jwtAuth, userRoute);
+    app.use("/api/user", userRoute);
+
 };
 
 

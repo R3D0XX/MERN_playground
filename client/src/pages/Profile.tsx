@@ -20,7 +20,7 @@ function Profile() {
       myHeaders.append("Authorization", "Bearer ${token}");
 
       const requestOptions = {
-        method: "POST",
+        method: "GET",
         headers: myHeaders,
       };
 
