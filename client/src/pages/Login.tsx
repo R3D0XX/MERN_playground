@@ -28,7 +28,7 @@ function Login() {
   };
   const handleSubmitLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //   console.log("loginCredentials", loginCredentials);
+    // console.log("loginCredentials", loginCredentials);
 
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -51,6 +51,8 @@ function Login() {
         const result: LoginResponse = await response.json();
         console.log("result", result);
         const token = result.token;
+        console.log("token", token);
+        console.log("token", token);
         if (token) {
           localStorage.setItem("token", token);
         }

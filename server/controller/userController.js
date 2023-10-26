@@ -127,6 +127,27 @@ const login = async (req, res) => {
     catch (error) {
         console.log('error', error)
     }
-}
+};
+const getProfile = async (req, res) => {
+    // console.log("profile route working");
+    console.log('req.user', req.user)
+    if (req.user) {
+        res.status(200).json({
+            success: true,
+            message: "Profile fetched successfully",
+            user: {
+                userName: req.user.userName,
+                email: req.user.email,
+                userImage: req.user.userImage,
+            }
+        })
+    }
+    if (!req.user) {
+        res.status(400).json({
+            success: false,
+            message: "User not found"
+        })
+    }
+};
 
-export { uploadImage, register, login };
+export { uploadImage, register, login, getProfile }

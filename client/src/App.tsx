@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 
 function App() {
   // const fetchMemes = () => {
@@ -22,6 +23,8 @@ function App() {
       <Register />
       <br />
       <Login />
+      <br />
+      <Profile />
     </>
   );
 }
