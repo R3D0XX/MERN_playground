@@ -7,7 +7,7 @@ type User = {
   userImage?: string;
 };
 
-function Profile() {
+const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
 
   const getProfile = async () => {
@@ -52,6 +52,6 @@ function Profile() {
       {user && <img src={user.userImage} style={{ width: "220px" }} />}
     </div>
   );
-}
+};
 
 export default Profile;
