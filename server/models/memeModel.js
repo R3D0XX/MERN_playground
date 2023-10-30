@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const memeSchema = new mongoose.Schema({
-    name: {
+    header: {
         type: String,
         required: true,
     },
@@ -12,7 +12,29 @@ const memeSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
+    },
+    tags: {
+        object: {
+            type: String,
+            required: false,
+
+            type: String,
+            required: false,
+
+            type: String,
+            required: false,
+
+            type: String,
+            required: false,
+
+            type: String,
+            required: false,
+
+            type: String,
+            required: false,
+        },
     }
+
 
 });
 
