@@ -13,6 +13,7 @@ import MyRoot from "./components/MyRoot";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import MyNavbar from "./components/MyNavbar";
 
 function App() {
   const router = createBrowserRouter(
@@ -43,6 +44,8 @@ function App() {
   return (
     <>
       <h1> Spatial Magic</h1>
+      <MyNavbar />
+      <br />
       <Register />
       <br />
       <Login />
