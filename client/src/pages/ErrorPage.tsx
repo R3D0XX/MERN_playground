@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouteError } from "react-router-dom";
 
 interface RouteErrorType {
   data: string;
@@ -10,12 +11,18 @@ interface RouteErrorType {
 }
 
 const ErrorPage = () => {
-  return (
-    <div>
-      <h2>Something went wrong...</h2>
-      <h3>{}</h3>
-    </div>
-  );
+  const error = useRouteError() as RouteErrorType;
+  console.log("Error", error);
+  if (error) {
+    return (
+      <div>
+        <h1>Error: {error.error.message}</h1>
+        <p>Status: {error.status}</p>
+        <p>Status Text: {error.statusText}</p>
+        <p>Data: {error.data}</p>
+      </div>
+    );
+  }
 };
 
 export default ErrorPage;
