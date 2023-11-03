@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-
-type User = {
-  userName: string;
-  email: string;
-  password: string;
-  userImage?: string;
-};
+import { User } from "../types/CustomTypes";
 
 const Profile = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -47,7 +41,7 @@ const Profile = () => {
 
   return (
     <div>
-      <h2>{user ? user.userName : ""} Profile</h2>
+      <h2>{user ? user.username : ""} Profile</h2>
       <button onClick={getProfile}>Get Profile</button>
       {user && <img src={user.userImage} style={{ width: "220px" }} />}
     </div>

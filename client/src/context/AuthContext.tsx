@@ -23,13 +23,13 @@ const AuthInitContext = {
   loginCredentials: null,
   isLoggedIn: false,
   isLoading: true,
-  setUser: () => console.log("context not initialized"),
-  logIn: () => console.log("context not initialized"),
-  setIsLoggedIn: () => console.log("context not initialized"),
-  setLoginCredentials: () => console.log("context not initialized"),
-  logOut: () => console.log("context not initialized"),
-  getProfile: () => console.log("context not initialized"),
-  authenticateUser: () => console.log("context not initialized"),
+  setUser: () => {},
+  logIn: () => {},
+  setIsLoggedIn: () => {},
+  setLoginCredentials: () => {},
+  logOut: () => {},
+  getProfile: () => {},
+  authenticateUser: () => {},
 };
 export const AuthContext = createContext<AuthContextType>(AuthInitContext);
 
