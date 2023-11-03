@@ -52,7 +52,6 @@ function Login() {
         console.log("result", result);
         const token = result.token;
         console.log("token", token);
-        console.log("token", token);
         if (token) {
           localStorage.setItem("token", token);
         }

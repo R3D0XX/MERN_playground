@@ -16,20 +16,20 @@ import Favorites from "./pages/Favorites";
 import MyNavbar from "./components/MyNavbar";
 
 function App() {
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route path="/" element={<MyRoot />} errorElement={<ErrorPage />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-        <Route
-          path="profile"
-          element={<Profile />}
-          // children={[<Route path="favorites" element={<Favorites />}]}
-        />
-      </Route>
-    )
-  );
+  // const router = createBrowserRouter(
+  //   createRoutesFromElements(
+  //     <Route path="/" element={<MyRoot />} errorElement={<ErrorPage />}>
+  //       <Route index element={<Home />} />
+  //       <Route path="login" element={<Login />} />
+  //       <Route path="register" element={<Register />} />
+  //       <Route
+  //         path="profile"
+  //         element={<Profile />}
+  //         // children={[<Route path="favorites" element={<Favorites />}]}
+  //       />
+  //     </Route>
+  //   )
+  // );
 
   // const fetchMemes = () => {
   //   fetch("localhost:5001/api/memes")
