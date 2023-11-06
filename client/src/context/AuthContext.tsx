@@ -1,23 +1,12 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
-import { LoginCredentials, LoginResponse, User } from "../types/CustomTypes";
+import {
+  AuthContextProviderProps,
+  AuthContextType,
+  LoginCredentials,
+  LoginResponse,
+  User,
+} from "../types/CustomTypes";
 
-interface AuthContextType {
-  user: User | null;
-  loginCredentials: LoginCredentials | null;
-  isLoggedIn: boolean;
-  isLoading: boolean;
-  setUser: (user: User) => void;
-  logIn: () => void;
-  setIsLoggedIn: (isLoggedIn: boolean) => void;
-  setLoginCredentials: (loginCredentials: LoginCredentials) => void;
-  logOut: () => void;
-  getProfile: () => void;
-  authenticateUser: () => void;
-}
-
-interface AuthContextProviderProps {
-  children: ReactNode;
-}
 const AuthInitContext = {
   user: null,
   loginCredentials: null,
@@ -78,15 +67,17 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
       alert(`An error occurred while trying to log in.\n\n${error}`); //\n\n sind zeilenumbrüche
     }
   };
+
   const getProfile = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      alert("need to be logged-In");
+      alert("you need to login first");
       setUser(null);
     }
     if (token) {
       const myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${token}`);
+
       const requestOptions = {
         method: "GET",
         headers: myHeaders,
@@ -96,14 +87,17 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
           "http://localhost:5001/api/user/profile",
           requestOptions
         );
-        if (response.ok) {
-          setIsLoading(false);
+        if (!response.ok) {
+          alert(response.statusText);
         }
         if (response.ok) {
           const userData: User = await response.json();
           console.log("userData", userData);
           setUser({ ...userData });
           setIsLoggedIn(true);
+          //! or ?
+          //! const user = result.user as User;
+          //! setUser(user);
         } else {
           throw new Error("Failed to load profile data.");
         }

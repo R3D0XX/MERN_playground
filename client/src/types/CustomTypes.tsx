@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 export type UserImage = {
   userImage: string;
@@ -28,4 +28,24 @@ export interface LoginResponse {
   msg: string;
   user: User;
   token: string;
+}
+
+export interface AuthContextProviderProps {
+  children: ReactNode;
+}
+
+export interface AuthContextType {
+  user: User | null;
+  loginCredentials: LoginCredentials | null;
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  setUser: (user: User) => void;
+  logIn: () => void;
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+  setLoginCredentials: React.Dispatch<
+    React.SetStateAction<LoginCredentials | null>
+  >;
+  logOut: () => void;
+  getProfile: () => void;
+  authenticateUser: () => void;
 }

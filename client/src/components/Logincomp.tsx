@@ -4,12 +4,12 @@ import { LoginCredentials, LoginResponse, User } from "../types/CustomTypes";
 import { useNavigate } from "react-router-dom";
 import LogIn from "../pages/Login";
 
-function Login() {
+function Logincomp() {
   const {
     loginCredentials,
-    setloginCredentials,
+    setLoginCredentials,
     logIn,
-    isUserLoggedIn,
+    isLoggedIn,
     setIsLoggedIn,
     user,
   } = useContext(AuthContext);
@@ -20,7 +20,7 @@ function Login() {
 
   const handleLoginInput = (e: ChangeEvent<HTMLInputElement>) => {
     // console.log("e.target.name", e.target.name);
-    setloginCredentials({
+    setLoginCredentials({
       ...(loginCredentials as LoginCredentials),
       [e.target.name]: e.target.value,
     });
@@ -93,4 +93,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Logincomp;

@@ -13,8 +13,6 @@ const Home = () => {
       <br />
       <Register />
       <br />
-      <Login />
-      <br />
       <Profile />
     </div>
   );

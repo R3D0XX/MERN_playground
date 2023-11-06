@@ -15,16 +15,24 @@ import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import MyNavbar from "./components/MyNavbar";
-import LogIn from "./pages/Login";
 import ProtectedRoot from "./components/ProtectedRoot";
 import { AuthContextProvider } from "./context/AuthContext";
+import Login from "./pages/Login";
 
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<MyRoot />} errorElement={<ErrorPage />}>
+      <Route
+        path="/"
+        element={
+          <AuthContextProvider>
+            <MyRoot />
+          </AuthContextProvider>
+        }
+        errorElement={<ErrorPage />}
+      >
         <Route index element={<Home />} />
-        <Route path="login" element={<LogIn />} />
+        <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route
           path="profile"
@@ -59,18 +67,18 @@ function App() {
   return (
     <>
       <div className="main">
-        <AuthContextProvider>
-          <RouterProvider router={router} />
-        </AuthContextProvider>
+        {/* <AuthContextProvider> */}
+        <RouterProvider router={router} />
+        {/* </AuthContextProvider> */}
       </div>
-
+      {/* 
       <h1> Spatial Magic</h1>
       <br />
       <Register />
       <br />
-      <LogIn />
+      <Login />
       <br />
-      <Profile />
+      <Profile /> */}
     </>
   );
 }
